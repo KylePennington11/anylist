@@ -107,6 +107,43 @@ any.login().then(async () => {
 ```
 
 
+### Getting Started with Stores
+
+```javascript
+const AnyList = require('anylist');
+
+const any = new AnyList({email: 'hi@here.com', password: 'password'});
+
+any.login().then(async () => {
+  // Get all stores
+  await any.getStores();
+
+  console.log(`Found ${any.stores.length} stores:`);
+  any.stores.forEach(store => {
+    console.log(`- ${store.name} (ID: ${store.identifier})`);
+  });
+
+  // Get store by name
+  const targetStore = any.getStoreByName('Walmart');
+  if (targetStore) {
+    console.log(`Found store: ${targetStore.name}`);
+  }
+
+  // Get store by ID
+  const storeById = any.getStoreById('some-store-id');
+  if (storeById) {
+    console.log(`Found store: ${storeById.name}`);
+  }
+
+  // Note: Stores are also automatically loaded when you call getLists()
+  await any.getLists();
+  console.log(`Stores available: ${any.stores.length}`);
+
+  any.teardown();
+});
+```
+
+
 ### Persistent Credentials Storage
 By default, the client ID and authentications tokens are encrypted with AES-256 encryption using your account password and then stored to disk. The default storage location is the `.anylist_credentials` file in the user home directory. If you wish to change the storage location, set the `credentialsFile` parameter of the `AnyList` constructor to the desired path. If you wish to disable persistent credentials storage, set the `credentialsFile` parameter to `null`.
 

@@ -9,7 +9,8 @@
     "api",
     "wrapper",
     "client",
-    "recipe"
+    "recipe",
+    "store"
   ],
   "version": "0.8.5",
   "main": "lib/index.js",
